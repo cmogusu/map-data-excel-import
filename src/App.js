@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import ImportData from './components/ImportData'
+import GMaps from './components/GMaps'
+import 'antd/dist/antd.css'
+import './App.css'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const d = [["Name","Type","Lattitude","Longitude"],["Empire Blvd","Road",40.664045,-73.95067],["Boropack","Building",40.662107,-73.945117],["Resorts world casino","Building",40.673405,-73.831781],["Federal hall","Building",40.707443,-74.01007]]
+
+class App extends Component {
+  state = {
+    data: d,
+  }
+
+  setData = data => {
+    this.setState({ data })
+  }
+
+  render() {
+    const { data } = this.state
+    return (
+      <div className="App">
+        {data.length < 1
+          ? <ImportData setData={this.setData} />
+          : <GMaps data={data} />
+        }
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App
