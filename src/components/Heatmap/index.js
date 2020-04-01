@@ -1,31 +1,37 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { GoogleMap, LoadScript, DrawingManager } from '@react-google-maps/api'
+import { GoogleMap, LoadScript, HeatmapLayer } from '@react-google-maps/api'
 import { LoadingOutlined } from '@ant-design/icons'
 import { GOOGLE_MAPS_API } from '../../constants/common'
 
 class GMaps extends Component {
   map = null
 
-  dm = null
+  hm = null
+
+  state = {
+    isGoogleLoaded: false,
+  }
+
+  handleLoaded = () => {
+    this.setState({ isGoogleLoaded: true })
+  }
 
   handleMapLoaded = map => {
     this.map = map
   }
 
-  handleOnDManagerLoad = dm => {
-    this.dm = dm
+  handleHeatmapLoaded = hm => {
+    this.hm = hm
+    this.forceUpdate()
   }
 
-  handleOnPolygonComplete = polyline => {
-    const mvcArr = polyline.getPath()
-    const coords = mvcArr
-      .getArray()
-      .map(latLng => ({
-        lat: latLng.lat(),
-        lng: latLng.lng(),
-      }))
-  }
+  getDataPoints = () =>
+    this
+      .props
+      .data
+      .slice(1)
+      .map(([, , lat, lng]) => window.google.maps.LatLng(lat, lng))
 
   render() {
     const data = this.props.data.slice(1)
@@ -37,7 +43,8 @@ class GMaps extends Component {
           id="script-loader"
           googleMapsApiKey={GOOGLE_MAPS_API}
           loadingElement={<LoadingOutlined />}
-          libraries={['drawing']}
+          libraries={['visualization']}
+          onLoad={this.handleLoaded}
         >
           <GoogleMap
             center={{ lat, lng }}
@@ -46,11 +53,12 @@ class GMaps extends Component {
             zoom={18}
             onLoad={this.handleMapLoaded}
           >
-            <DrawingManager
-              drawingMode="polygon"
-              onLoad={this.handleOnDManagerLoad}
-              onPolygonComplete={this.handleOnPolygonComplete}
+          {this.state.isGoogleLoaded && (
+            <HeatmapLayer
+              data={this.getDataPoints()}
+              onLoad={this.handleHeatmapLoaded}
             />
+          )}
           </GoogleMap>
         </LoadScript>
       </div>
