@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ImportData from './components/ImportData'
-import GMaps from './components/BicyclingLayer'
+import Layer from './components/GroundOverlay'
 import 'antd/dist/antd.css'
 import './App.css'
 
@@ -21,7 +21,7 @@ class App extends Component {
       <div className="App">
         {data.length < 1
           ? <ImportData setData={this.setData} />
-          : <GMaps data={data} />
+          : <Layer data={data} />
         }
       </div>
     )
