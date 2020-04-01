@@ -1,7 +1,6 @@
 {
   "name": "map-imports",
   "version": "0.1.0",
-  "homepage": "/sites/import",
   "private": true,
   "dependencies": {
     "@react-google-maps/api": "^1.8.6",

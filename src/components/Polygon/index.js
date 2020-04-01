@@ -1,21 +1,46 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
+import { GoogleMap, LoadScript, Polygon } from '@react-google-maps/api'
 import { LoadingOutlined } from '@ant-design/icons'
 import { GOOGLE_MAPS_API } from '../../constants/common'
 import { getBounds } from '../../services/common'
 import './style.css'
 
 class GMaps extends Component {
-  handleOnLoad = map => {
+  map = null
+
+  poly = null
+
+  handleMapLoaded = map => {
+    this.map = map
+    this.fitToBounds()
+  }
+
+  handlePolyLoaded = poly => {
+    this.poly = poly
+  }
+
+  fitToBounds = () => {
     const data = this.props.data.slice(1)
     const bounds = getBounds(data)
-    map.fitBounds(bounds)
+    this.map.fitBounds(bounds)
+  }
+
+  handleDragEnd = () => {
+    const path = this.poly.getPath()
+    const coords = path
+      .getArray()
+      .map(latLng => ({
+        lat: latLng.lat(),
+        lng: latLng.lng(),
+      }))
+    console.log(coords)
   }
 
   render() {
     const data = this.props.data.slice(1)
     const [, , lat, lng] = data[0]
+    const path = data.map(([, , lat, lng]) => ({ lat, lng }))
 
     return (
       <div className="gmaps">
@@ -29,16 +54,18 @@ class GMaps extends Component {
             id="map"
             mapContainerStyle={{ width: '800px', height: '450px' }}
             zoom={10}
-            onLoad={this.handleOnLoad}
+            onLoad={this.handleMapLoaded}
           >
-            {data.map(([name, type, lat, lng]) => (
-              <Marker
-                key={name}
-                label={name}
-                title={name}
-                position={{ lat, lng }}
-              />
-            ))}
+            <Polygon
+              draggable
+              editable
+              path={path}
+              strokeColor="#00ff00"
+              strokeOpacity={0.5}
+              strokeWeight={2}
+              onMouseUp={this.handleDragEnd}
+              onLoad={this.handlePolyLoaded}
+            />
           </GoogleMap>
         </LoadScript>
       </div>

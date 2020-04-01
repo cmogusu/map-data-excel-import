@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ImportData from './components/ImportData'
-import GMaps from './components/Circle'
+import GMaps from './components/Polygon'
 import 'antd/dist/antd.css'
 import './App.css'
 

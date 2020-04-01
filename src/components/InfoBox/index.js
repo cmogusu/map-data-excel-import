@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { GoogleMap, LoadScript, Circle } from '@react-google-maps/api'
+import { GoogleMap, LoadScript, Circle, InfoBox, Marker } from '@react-google-maps/api'
 import { LoadingOutlined } from '@ant-design/icons'
 import { GOOGLE_MAPS_API } from '../../constants/common'
 import './style.css'
@@ -15,14 +15,16 @@ const options = {
 }
 
 class GMaps extends Component {
+  map = null
+
   circle = null
 
-  handleDrag = event => {
-    console.log('*****', event)
-  }
+  infoBox = null
 
-  handleDragStart = event => {
-    console.log('######', event.latLng.lat(), event.latLng.lng())
+  marker = null
+
+  state = {
+    isMapLoaded: false,
   }
 
   handleDragEnd = () => {
@@ -31,8 +33,22 @@ class GMaps extends Component {
     console.log('$$$$$$', bounds.toJSON(), center.toJSON())
   }
 
-  handleLoad = circle => {
+  handleMapLoaded = map => {
+    this.map = map
+    this.setState({ isMapLoaded: true })
+  }
+
+  handleCircleLoaded = circle => {
     this.circle = circle
+  }
+
+  handleInfoboxLoaded = infoBox => {
+    this.infoBox = infoBox
+  }
+
+  handleMarkerLoaded = marker => {
+    this.marker = marker
+    this.forceUpdate()
   }
 
   handleRadiusChanged = () => {
@@ -55,18 +71,40 @@ class GMaps extends Component {
             id="map"
             mapContainerStyle={{ width: '800px', height: '450px' }}
             zoom={18}
+            onLoad={this.handleMapLoaded}
           >
             <Circle
               center={{ lat, lng }}
               draggable
               radius={30}
               options={options}
-              // onDrag={this.handleDrag}
               onDragEnd={this.handleDragEnd}
-              // onDragStart={this.handleDragStart}
-              onLoad={this.handleLoad}
+              onLoad={this.handleCircleLoaded}
               onRadiusChanged={this.handleRadiusChanged}
             />
+            {!!this.marker && (
+              <InfoBox
+                anchor={this.marker}
+                position={{ lat, lng }}
+                onLoad={this.handleInfoboxLoaded}
+              >
+                <div className="info-box">
+                  Hello world
+                </div>
+              </InfoBox>
+            )}
+            {this.state.isMapLoaded && (
+              <Marker
+                position={{ lat, lng }}
+                options={{
+                  anchorPoint: { x: 80, y: 80 },
+                }}
+                onLoad={this.handleMarkerLoaded}
+                icon={{
+                  url: 'http://localhost:3000/logo1.png',
+                }}
+              />
+            )}
           </GoogleMap>
         </LoadScript>
       </div>
