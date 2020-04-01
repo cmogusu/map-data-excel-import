@@ -24,23 +24,40 @@ const getBounds = data => {
   }
 }
 
+const options = {
+  strokeColor: '#FF0000',
+  strokeOpacity: 0.8,
+  strokeWeight: 2,
+  fillColor: '#FF0000',
+  fillOpacity: 0.35,
+  visible: true,
+}
+
 class GMaps extends Component {
+  circle = null
+
   handleOnLoad = map => {
     const data = this.props.data.slice(1)
     const bounds = getBounds(data)
     map.fitBounds(bounds)
   }
 
-  handleDrag = map => {
-    console.log('*****', map)
+  handleDrag = event => {
+    console.log('*****', event)
   }
 
-  handleDragStart = map => {
-    console.log('######', map)
+  handleDragStart = event => {
+    console.log('######', event.latLng.lat(), event.latLng.lng())
   }
 
-  handleDragEnd = map => {
-    console.log('$$$$$$', map.getBounds, map)
+  handleDragEnd = () => {
+    const bounds = this.circle.getBounds()
+    const center = this.circle.getCenter()
+    console.log('$$$$$$', bounds.toJSON(), center.toJSON())
+  }
+
+  handleLoad = circle => {
+    this.circle = circle
   }
 
   handleRadiusChanged = () => {
@@ -69,9 +86,11 @@ class GMaps extends Component {
               center={{ lat, lng }}
               draggable
               radius={30}
+              options={options}
               // onDrag={this.handleDrag}
               onDragEnd={this.handleDragEnd}
               // onDragStart={this.handleDragStart}
+              onLoad={this.handleLoad}
               onRadiusChanged={this.handleRadiusChanged}
             />
           </GoogleMap>
