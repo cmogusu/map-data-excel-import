@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import ImportData from './components/ImportData'
-import GMaps from './components/GMaps'
+import GMaps from './components/Circle'
 import 'antd/dist/antd.css'
 import './App.css'
 
-const d = [["Name","Type","Lattitude","Longitude"],["Empire Blvd","Road",40.664045,-73.95067],["Boropack","Building",40.662107,-73.945117],["Resorts world casino","Building",40.673405,-73.831781],["Federal hall","Building",40.707443,-74.01007]]
+const d = [["Name","Type","Latitude","Longitude"],["Empire Blvd","Road",40.664045,-73.95067],["Boropack","Building",40.662107,-73.945117],["Resorts world casino","Building",40.673405,-73.831781],["Federal hall","Building",40.707443,-74.01007]]
 
 class App extends Component {
   state = {

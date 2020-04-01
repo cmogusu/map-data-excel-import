@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
+import { GoogleMap, LoadScript, Circle } from '@react-google-maps/api'
 import { LoadingOutlined } from '@ant-design/icons'
 import { GOOGLE_MAPS_API } from '../../constants/common'
 import './style.css'
@@ -31,6 +31,22 @@ class GMaps extends Component {
     map.fitBounds(bounds)
   }
 
+  handleDrag = map => {
+    console.log('*****', map)
+  }
+
+  handleDragStart = map => {
+    console.log('######', map)
+  }
+
+  handleDragEnd = map => {
+    console.log('$$$$$$', map.getBounds, map)
+  }
+
+  handleRadiusChanged = () => {
+    console.log('radius changed')
+  }
+
   render() {
     const data = this.props.data.slice(1)
     const [, , lat, lng] = data[0]
@@ -46,17 +62,18 @@ class GMaps extends Component {
             center={{ lat, lng }}
             id="map"
             mapContainerStyle={{ width: '800px', height: '450px' }}
-            zoom={10}
-            onLoad={this.handleOnLoad}
+            zoom={18}
+            // onLoad={this.handleOnLoad}
           >
-            {data.map(([name, type, lat, lng]) => (
-              <Marker
-                key={name}
-                label={name}
-                title={name}
-                position={{ lat, lng }}
-              />
-            ))}
+            <Circle
+              center={{ lat, lng }}
+              draggable
+              radius={30}
+              // onDrag={this.handleDrag}
+              onDragEnd={this.handleDragEnd}
+              // onDragStart={this.handleDragStart}
+              onRadiusChanged={this.handleRadiusChanged}
+            />
           </GoogleMap>
         </LoadScript>
       </div>

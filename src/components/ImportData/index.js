@@ -66,22 +66,30 @@ class ImportData extends Component {
   render() {
     return (
       <div className="container">
-        <Dragger
-          accept=".xlsx, xlsm, .xml"
-          beforeUpload={this.handleBeforeUpload}
-          fileList={this.files}
-          name="file"
-          multiple={false}
-        >
-          <p className="ant-upload-drag-icon">
-            <InboxOutlined />
+        <div>
+          <p>
+            Please import an excel file contain the google map data.
+            <br />
+            <a href="/locations.xlsx" target="_blank">Here is a sample file</a> that you may use it import data
           </p>
-          <p className="ant-upload-text">Click or drag file to this area to upload</p>
-          <p className="ant-upload-hint">
-            Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-            band files
-          </p>
-        </Dragger>
+
+          <Dragger
+            accept=".xlsx, xlsm, .xml"
+            beforeUpload={this.handleBeforeUpload}
+            fileList={this.files}
+            name="file"
+            multiple={false}
+          >
+            <p className="ant-upload-drag-icon">
+              <InboxOutlined />
+            </p>
+            <p className="ant-upload-text">Click or drag file to this area to upload</p>
+            <p className="ant-upload-hint">
+              Support for a single or bulk upload. Strictly prohibit from uploading company data or other
+              band files
+            </p>
+          </Dragger>
+        </div>
       </div>
     )
   }
