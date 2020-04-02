@@ -29,7 +29,7 @@ class GMaps extends Component {
             zoom={18}
           >
             <KmlLayer
-              url='/to-amsterdam-and-beyond.kml'
+              url='http://clivemogusu.tk/media/to-amsterdam-and-beyond.kml'
               onLoad={this.handleOnLoad}
             />
           </GoogleMap>
