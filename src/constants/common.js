@@ -1,3 +1,3 @@
-export const GOOGLE_MAPS_API = 'AIzaSyBGraz0piF8xyoi2zAdb8xKTooF_8wqunc'
+export const GOOGLE_MAPS_API = process.env.REACT_APP_GOOGLE_MAPS_API
 
 export default {}
