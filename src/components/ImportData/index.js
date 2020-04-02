@@ -23,7 +23,8 @@ const getDataFromSheet = sheet => {
     arr[row - startRow] = []
     for(let col = startCol; col <= endCol; col += 1) {
       const cellRef = `${String.fromCharCode(col)}${row}`
-      arr[row - startRow][col - startCol] = sheet[cellRef].v
+      const value = sheet[cellRef] ? sheet[cellRef].v : ''
+      arr[row - startRow][col - startCol] = value
     }
   }
   return arr

@@ -40,7 +40,7 @@ class GMaps extends Component {
           >
             <GroundOverlay
               key={'url'}
-              url="https://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg"
+              url="http://clivemogusu.tk/media/page-not-found.jpg"
               bounds={bounds}
             />
           </GoogleMap>
