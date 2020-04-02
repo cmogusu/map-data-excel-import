@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ImportData from './components/ImportData'
-import Layer from './components/GroundOverlay'
+import Layer from './components/KmlLayer'
 import 'antd/dist/antd.css'
 import './App.css'
 

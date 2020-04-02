@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>To Amsterdam and beyond</name>
+	<description>
+</description>
+	<gx:CascadingStyle kml:id="__managed_style_015E5A7AD2127050193A">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>6</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+				<displayMode>hide</displayMode>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_1FAD4FEB6F1270501938">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>4</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+				<displayMode>hide</displayMode>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<StyleMap id="__managed_style_0F8D2300F81270501938">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_1FAD4FEB6F1270501938</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_015E5A7AD2127050193A</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Placemark id="0EB1F3943E1270501937">
+		<name>Amsterdam Central</name>
+		<LookAt>
+			<longitude>4.89457874412659</longitude>
+			<latitude>52.36661957220349</latitude>
+			<altitude>-0.2522363638994152</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>134.6771031406388</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_0F8D2300F81270501938</styleUrl>
+		<Point>
+			<coordinates>4.894254559049167,52.36673719367201,-0.1362576364981238</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="0E5B1A9271127051FF2F">
+		<name>Big building</name>
+		<LookAt>
+			<longitude>4.900157698185817</longitude>
+			<latitude>52.36694423616034</latitude>
+			<altitude>-0.6328483982358379</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>582.5137045109296</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_0F8D2300F81270501938</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						4.901107337606536,52.36815041532289,0.1342092171347553 4.901056345456074,52.36812533518124,0.2682640423726035 4.900863557872396,52.36819998827307,0.148380581955021 4.900553812053903,52.36796439877813,0.1190544778707547 4.90052334139107,52.36777835359977,0.1190744965602408 4.900609672791079,52.36771323530311,0.1191575562263059 4.900365910006541,52.3674992794268,0.1190215109044779 4.900421767885604,52.36727601907302,0.119139651021527 4.900635052892839,52.36709307226567,0.1191010240470081 4.900873778415908,52.36700625392722,0.07893878396323828 4.901279752814187,52.36697833199996,0.241047514322057 4.901573966845385,52.36706511022037,0.3677241842519918 4.901706238678392,52.3671302336683,0.2422579681267067 4.901667603940522,52.36722670831875,-0.5077016938904966 4.90218902829092,52.36766360112897,0.1191816858840378 4.901107337606536,52.36815041532289,0.1342092171347553 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+</Document>
+</kml>
