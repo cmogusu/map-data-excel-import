@@ -1,32 +1,32 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import camelCase from 'lodash/camelCase'
 
-const TotalDeaths = ({ totalInfected, totalInfectedByTown }) => (
-  <section>
-    <div>
-      <h3>Total Confirmed</h3>
-      <div>{totalInfected}</div>
-    </div>
-    <div>
-      <h4>Confirmed Cases by town</h4>
-      <ul>
-      {totalInfectedByTown.map(({ town, noOfInfected}) => (
-        <li key={town}>
-          <span>{noOfInfected}</span>
-          <span>{town}</span>
-        </li>
-      ))}
+const TotalDeaths = ({ totalDeaths, totalDeathsByTown }) => (
+  <div className="mb-2 border bg-light">
+    <section className="p-2 d-flex justify-content-center align-items-center flex-column mb-2">
+      <h3 className="h4">Total Deaths</h3>
+      <span className="black h2 font-weight-bold">{totalDeaths}</span>
+    </section>
+    <section>
+      <ul className="p-0 overflow-auto">
+        {totalDeathsByTown.map(({ town, number}) => (
+          <li className="list-unstyled border-bottom p-2" key={camelCase(town)}>
+            <span className="black pr-2">{number} deaths</span>
+            <span className="text-capitalize">{town}</span>
+          </li>
+        ))}
       </ul>
-    </div>
-  </section>
+    </section>
+  </div>
 )
 
 TotalDeaths.propTypes = {
-  totalInfected: PropTypes.number.isRequired,
-  totalInfectedByTown: PropTypes.arrayOf(
+  totalDeaths: PropTypes.number.isRequired,
+  totalDeathsByTown: PropTypes.arrayOf(
     PropTypes.shape({
       town: PropTypes.string,
-      noOfInfected: PropTypes.number,
+      number: PropTypes.number,
     })
   ).isRequired,
 }
