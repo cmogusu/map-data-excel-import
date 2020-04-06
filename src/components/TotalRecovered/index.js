@@ -10,9 +10,9 @@ const TotalRecovered = ({ totalRecovered, totalRecoveredByTown }) => (
     </section>
     <section>
       <ul className="p-0 overflow-auto">
-        {totalRecoveredByTown.map(({ town, number}) => (
+        {totalRecoveredByTown.map(({ town, totalRecovered}) => (
           <li className="list-unstyled border-bottom p-2" key={camelCase(town)}>
-            <span className="green pr-2">{number} recovered</span>
+            <span className="green pr-2">{totalRecovered} recovered</span>
             <span className="text-capitalize">{town}</span>
           </li>
         ))}
@@ -26,7 +26,7 @@ TotalRecovered.propTypes = {
   totalRecoveredByTown: PropTypes.arrayOf(
     PropTypes.shape({
       town: PropTypes.string,
-      number: PropTypes.number,
+      totalRecovered: PropTypes.number,
     })
   ).isRequired,
 }

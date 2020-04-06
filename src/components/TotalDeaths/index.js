@@ -10,9 +10,9 @@ const TotalDeaths = ({ totalDeaths, totalDeathsByTown }) => (
     </section>
     <section>
       <ul className="p-0 overflow-auto">
-        {totalDeathsByTown.map(({ town, number}) => (
+        {totalDeathsByTown.map(({ town, totalDeaths}) => (
           <li className="list-unstyled border-bottom p-2" key={camelCase(town)}>
-            <span className="black pr-2">{number} deaths</span>
+            <span className="black pr-2">{totalDeaths} deaths</span>
             <span className="text-capitalize">{town}</span>
           </li>
         ))}
@@ -26,7 +26,7 @@ TotalDeaths.propTypes = {
   totalDeathsByTown: PropTypes.arrayOf(
     PropTypes.shape({
       town: PropTypes.string,
-      number: PropTypes.number,
+      totalDeaths: PropTypes.number,
     })
   ).isRequired,
 }

@@ -2,20 +2,6 @@
   padding: 20px;
 }
 
-.gmaps {
-  height: 100vh;
-  padding: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.bordered {
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  padding: 5px;
-}
-
 .red {
   color: red;
 }

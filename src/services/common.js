@@ -1,3 +1,5 @@
+import get from 'lodash/get'
+
 export const getBounds = data => {
   let minLat = Number.MAX_SAFE_INTEGER
   let maxLat = - Number.MAX_SAFE_INTEGER
@@ -17,4 +19,13 @@ export const getBounds = data => {
   }
 }
 
-export default {}
+export const getPropSum = (objArr, prop) =>
+  objArr.reduce((sum, obj) => {
+    sum += get(obj, prop, 0)
+    return sum
+  }, 0)
+
+export const addCommasToNumber = number =>
+  window.Intl
+    ? new Intl.NumberFormat().format(number)
+    : number

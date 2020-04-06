@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import Header from './components/Header'
-import TotalConfirmed from './components/TotalConfirmed'
+import TotalInfected from './components/TotalInfected'
 import TotalRecovered from './components/TotalRecovered'
 import TotalDeaths from './components/TotalDeaths'
-import ClusterMap from './components/ClusterMap'
+// import CircleMap from './components/CircleMap'
+import ImportData from './components/ImportData2'
+import { getPropSum } from './services/common'
 import 'antd/dist/antd.css'
 import './App.css'
 
@@ -15,26 +17,38 @@ const totalInfectedByTown = [
   {
     town: 'Johanesburg',
     number: 337548,
+    lat: 40.664045,
+    lng: -73.95067
   },
   {
     town: 'Newcastle',
     number: 134658,
+    lat: 40.662107,
+    lng: -73.945117,
   },
   {
     town: 'Polokwane',
     number: 456878,
+    lat: 40.673405,
+    lng: -73.831781,
   },
   {
     town: 'Mbombella',
     number: 457662,
+    lat: 40.707443,
+    lng: -74.01007,
   },
   {
     town: 'Cape Town',
     number: 98452,
+    lat: 40.807443,
+    lng: -74.51007,
   },
   {
     town: 'Port Elizabeth',
     number: 78954,
+    lat: 40.707643,
+    lng: -74.02307,
   },
 ]
 
@@ -44,38 +58,76 @@ const totalDeathsByTown = totalInfectedByTown
 const totalRecovered = totalInfected
 const totalRecoveredByTown = totalInfectedByTown
 
+const formatRawData = rawData =>
+  rawData.map(datum => {
+    const [town, totalInfected, totalDeaths, totalRecovered, lat, lng] = datum
+    return {
+      town,
+      totalInfected,
+      totalDeaths,
+      totalRecovered,
+      lat,
+      lng,
+    }
+  })
+
 class App extends Component {
+  _isMounted = true
+
+  totalInfected = 0
+
+  totalDeaths = 0
+
+  totalRecovered = 0
+
   state = {
-    data: d,
+    data: [],
   }
 
-  setData = data => {
-    this.setState({ data })
+  componentWillUnmount() {
+    this._isMounted = false
+  }
+
+  setTotals = data => {
+    this.totalInfected = getPropSum(data, 'totalInfected')
+    this.totalDeaths = getPropSum(data, 'totalDeaths')
+    this.totalRecovered = getPropSum(data, 'totalRecovered')
+  }
+
+  setData = rawData => {
+    const data = formatRawData(rawData)
+    this.setTotals(data)
+    if (this._isMounted) this.setState({ data })
   }
 
   render() {
+    const { data } = this.state
+    console.log(data)
+
     return (
       <main className="app p-2">
         <Header />
 
         <div className="row align-self-stretch no-gutters">
           <div className="col-md-4 col-lg-2 pr-2">
-            <TotalConfirmed totalInfected={totalInfected} totalInfectedByTown={totalInfectedByTown} />
+            <ImportData hasData={data.length > 0} setData={this.setData} />
+            <TotalInfected totalInfected={this.totalInfected} totalInfectedByTown={data} />
           </div>
           <div className="col-md-5 col-lg-6 pr-2">
-            <ClusterMap totalInfectedByTown={d} />
+            {/* <CircleMap totalInfectedByTown={totalInfectedByTown} /> */}
           </div>
           <div className="col-md-4">
-            <div className="row">
-              <div className="col-md-6">
-                <TotalDeaths totalDeaths={totalDeaths} totalDeathsByTown={totalDeathsByTown} />
+            <div className="row no-gutters">
+              <div className="col-md-6 pr-2">
+                <TotalDeaths totalDeaths={this.totalDeaths} totalDeathsByTown={data} />
               </div>
               <div className="col-md-6">
-                <TotalRecovered totalRecovered={totalRecovered} totalRecoveredByTown={totalRecoveredByTown} />
+                <TotalRecovered totalRecovered={this.totalRecovered} totalRecoveredByTown={data} />
               </div>
             </div>
           </div>
         </div>
+
       </main>
     )
   }
