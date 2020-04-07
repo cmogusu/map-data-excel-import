@@ -1,17 +1,17 @@
 import React, { Component, createRef } from 'react'
 import PropTypes from 'prop-types'
 import camelCase from 'lodash/camelCase'
-import { GoogleMap, LoadScript, Circle } from '@react-google-maps/api'
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
 import { LoadingOutlined } from '@ant-design/icons'
 import { GOOGLE_MAPS_API } from '../../constants/common'
 import mapStyles from './mapStyles'
 
 const circleOptions = {
   strokeColor: 'rgb(240, 0, 0)',
-  strokeOpacity: 0.5,
-  strokeWeight: 1,
+  strokeOpacity: 0.1,
+  strokeWeight: 2,
   fillColor: 'rgb(230, 0, 0)',
-  fillOpacity: 0.6,
+  fillOpacity: 0.5,
   visible: true,
 }
 
@@ -44,6 +44,7 @@ class GMaps extends Component {
   state = {
     height: 0,
     zoom: 10,
+    isGoogleLoaded: false,
   }
 
   componentDidMount() {
@@ -71,6 +72,10 @@ class GMaps extends Component {
     if (this._isMounted) this.setState({ zoom })
   }
 
+  setGoogleLoaded() {
+    if (this._isMounted) this.setState({ isGoogleLoaded: true })
+  }
+
   setMapBounds() {
     this._map.fitBounds(southAfricaBounds)
   }
@@ -78,6 +83,8 @@ class GMaps extends Component {
   handleOnLoad = map => {
     this._map = map
     this.setMapBounds()
+    this.setGoogleLoaded()
+    console.log(window.google)
   }
 
   handleZoomChanged = () => {
@@ -88,17 +95,18 @@ class GMaps extends Component {
   }
 
   render() {
-    const { height, zoom } = this.state
+    const { height, isGoogleLoaded } = this.state
     const { totalInfectedByTown } = this.props
+    // const totalInfectedByTown = this.props.totalInfectedByTown.slice(0, 10)
 
     return (
-      <section className="border bg-light h-100" ref={this.containerRef}>
-        {height > 0 && (
-          <LoadScript
-            id="script-loader"
-            googleMapsApiKey={GOOGLE_MAPS_API}
-            loadingElement={<LoadingOutlined />}
-          >
+      <section className="border bg-dark h-100" ref={this.containerRef}>
+        <LoadScript
+          id="script-loader"
+          googleMapsApiKey={GOOGLE_MAPS_API}
+          loadingElement={<LoadingOutlined />}
+        >
+          {height > 0 && (
             <GoogleMap
               center={center}
               id="map"
@@ -108,18 +116,22 @@ class GMaps extends Component {
               onLoad={this.handleOnLoad}
               onZoomChanged={this.handleZoomChanged}
             >
-              {false && totalInfectedByTown.map(({ town, lat, lng, number }) => (
-                <Circle
+              {isGoogleLoaded && totalInfectedByTown.map(({ town, lat, lng, totalInfected }) => (
+                <Marker
                   animation="DROP"
-                  center={{ lat, lng }}
+                  position={{ lat, lng }}
                   key={camelCase(town)}
-                  options={circleOptions}
-                  radius={number/(zoom * 30)}
+                  icon={{
+                    ...circleOptions,
+                    path: window.google.maps.SymbolPath.CIRCLE,
+                    scale: totalInfected/4e3,
+                  }}
+                  title={town}
                 />
               ))}
             </GoogleMap>
-          </LoadScript>
-        )}
+          )}
+        </LoadScript>
       </section>
     )
   }

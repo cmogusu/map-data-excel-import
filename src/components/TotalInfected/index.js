@@ -2,9 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import camelCase from 'lodash/camelCase'
 import { addCommasToNumber } from '../../services/common'
+import './style.css'
 
 const TotalInfected = ({ totalInfected, totalInfectedByTown }) => (
-  <div className="mb-2">
+  <div className="mb-2 total-infected">
     <section className="border p-2 total-confirmed d-flex justify-content-center align-items-center flex-column mb-2 bg-light">
       <h3 className="h4">Total Confirmed</h3>
       <span className="red total-number h2 font-weight-bold">

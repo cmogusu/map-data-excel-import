@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import camelCase from 'lodash/camelCase'
+import './style.css'
 
 const TotalRecovered = ({ totalRecovered, totalRecoveredByTown }) => (
-  <div className="mb-2 border bg-light">
+  <div className="mb-2 border bg-light total-recovered">
     <section className="p-2 d-flex justify-content-center align-items-center flex-column mb-2">
       <h3 className="h4">Total Recovered</h3>
       <span className="green h2 font-weight-bold">{totalRecovered}</span>

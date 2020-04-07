@@ -1,0 +1,5 @@
+.total-deaths {
+  max-height: 100vh;
+  max-height: calc(100vh - 115px);
+  overflow: auto
+}
