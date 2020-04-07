@@ -1,6 +1,7 @@
 import React, { Component, createRef } from 'react'
 import PropTypes from 'prop-types'
 import camelCase from 'lodash/camelCase'
+import debounce from 'lodash/debounce'
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
 import { LoadingOutlined } from '@ant-design/icons'
 import { GOOGLE_MAPS_API } from '../../constants/common'
@@ -45,13 +46,28 @@ class GMaps extends Component {
     isGoogleLoaded: false,
   }
 
+  constructor(props) {
+    super(props)
+    this.setMapHeight = debounce(this.setMapHeight, 500)
+  }
+
   componentDidMount() {
     this._isMounted = true
     this.setMapHeight()
+    this.addEventListeners()
   }
 
   componentWillUnmount() {
     this._isMounted = false
+    this.removeEventListeners()
+  }
+
+  addEventListeners = () => {
+    window.addEventListener('resize', this.setMapHeight)
+  }
+
+  removeEventListeners = () => {
+    window.removeEventListener('resize', this.setMapHeight)
   }
 
   setMapHeight() {
@@ -94,10 +110,9 @@ class GMaps extends Component {
   render() {
     const { height, isGoogleLoaded } = this.state
     const { activeId, totalInfectedByTown } = this.props
-    console.log(activeId)
 
     return (
-      <section className="border bg-dark h-100" ref={this.containerRef}>
+      <section className="border bg-dark-blue h-100" ref={this.containerRef}>
         <LoadScript
           id="script-loader"
           googleMapsApiKey={GOOGLE_MAPS_API}

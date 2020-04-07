@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react'
 import PropTypes from 'prop-types'
 import camelCase from 'lodash/camelCase'
+import { addCommasToNumber } from '../../services/common'
 import './style.css'
 
 const TotalRecovered = ({ totalRecovered, totalRecoveredByTown, onSetActiveId }) => {
@@ -13,7 +14,9 @@ const TotalRecovered = ({ totalRecovered, totalRecoveredByTown, onSetActiveId })
     <div className="mb-2 border bg-light total-recovered">
       <section className="p-2 d-flex justify-content-center align-items-center flex-column mb-2">
         <h3 className="h4">Total Recovered</h3>
-        <span className="green h2 font-weight-bold">{totalRecovered}</span>
+        <span className="green h2 font-weight-bold">
+          {addCommasToNumber(totalRecovered)}
+        </span>
       </section>
       <section>
         <ul className="p-0 overflow-auto">
@@ -25,7 +28,9 @@ const TotalRecovered = ({ totalRecovered, totalRecoveredByTown, onSetActiveId })
               title={`Total recovered in ${town}`}
               onClick={handleClick}
             >
-              <span className="green pr-2">{totalRecovered} recovered</span>
+              <span className="green pr-2">
+                {addCommasToNumber(totalRecovered)} recovered
+              </span>
               <span className="text-capitalize">{town}</span>
             </li>
           ))}

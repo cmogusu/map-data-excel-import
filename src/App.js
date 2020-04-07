@@ -35,15 +35,24 @@ class App extends Component {
   totalRecovered = 0
 
   state = {
-    data: sampleData,
+    data: [],
     activeId: '',
+  }
+
+  componentDidMount() {
+    this.setSampleData()
   }
 
   componentWillUnmount() {
     this._isMounted = false
   }
 
-  setTotals = data => {
+  setSampleData() {
+    this.setTotals(sampleData)
+    this.setState({ data: sampleData })
+  }
+
+  setTotals(data) {
     this.totalInfected = getPropSum(data, 'totalInfected')
     this.totalDeaths = getPropSum(data, 'totalDeaths')
     this.totalRecovered = getPropSum(data, 'totalRecovered')
@@ -56,7 +65,6 @@ class App extends Component {
   }
 
   setActiveId = activeId => {
-    console.log('***', activeId)
     if (this._isMounted) this.setState({ activeId })
   }
 

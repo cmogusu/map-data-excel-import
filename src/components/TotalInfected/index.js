@@ -31,7 +31,9 @@ const TotalInfected = ({ totalInfected, totalInfectedByTown, onSetActiveId }) =>
               title={`Total infected in ${town}`}
               onClick={handleClick}
             >
-              <span className="red pr-2">{addCommasToNumber(totalInfected)}</span>
+              <span className="red pr-2">
+                {addCommasToNumber(totalInfected)}
+              </span>
               <span className="text-capitalize">{town}</span>
             </li>
           ))}
