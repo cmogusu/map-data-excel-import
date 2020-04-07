@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import camelCase from 'lodash/camelCase'
 import Header from './components/Header'
 import TotalInfected from './components/TotalInfected'
 import TotalRecovered from './components/TotalRecovered'
@@ -14,6 +15,7 @@ const formatRawData = rawData =>
   rawData.map(datum => {
     const [town, totalInfected, totalDeaths, totalRecovered, lat, lng] = datum
     return {
+      id: camelCase(town),
       town,
       totalInfected,
       totalDeaths,
@@ -34,6 +36,7 @@ class App extends Component {
 
   state = {
     data: sampleData,
+    activeId: '',
   }
 
   componentWillUnmount() {
@@ -52,8 +55,13 @@ class App extends Component {
     if (this._isMounted) this.setState({ data })
   }
 
+  setActiveId = activeId => {
+    console.log('***', activeId)
+    if (this._isMounted) this.setState({ activeId })
+  }
+
   render() {
-    const { data } = this.state
+    const { data, activeId } = this.state
 
     return (
       <main className="app p-2">
@@ -62,18 +70,18 @@ class App extends Component {
         <div className="row align-self-stretch no-gutters">
           <div className="col-md-4 col-lg-2 pr-2">
             <ImportData hasData={data.length > 0} setData={this.setData} />
-            <TotalInfected totalInfected={this.totalInfected} totalInfectedByTown={data} />
+            <TotalInfected totalInfected={this.totalInfected} totalInfectedByTown={data} onSetActiveId={this.setActiveId} />
           </div>
           <div className="col-md-5 col-lg-6 pr-2">
-            <CircleMap totalInfectedByTown={data} />
+            <CircleMap activeId={activeId} totalInfectedByTown={data}/>
           </div>
           <div className="col-md-4">
             <div className="row no-gutters">
               <div className="col-md-6 pr-2">
-                <TotalDeaths totalDeaths={this.totalDeaths} totalDeathsByTown={data} />
+                <TotalDeaths totalDeaths={this.totalDeaths} totalDeathsByTown={data} onSetActiveId={this.setActiveId} />
               </div>
               <div className="col-md-6">
-                <TotalRecovered totalRecovered={this.totalRecovered} totalRecoveredByTown={data} />
+                <TotalRecovered totalRecovered={this.totalRecovered} totalRecoveredByTown={data} onSetActiveId={this.setActiveId} />
               </div>
             </div>
           </div>

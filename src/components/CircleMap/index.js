@@ -7,10 +7,8 @@ import { GOOGLE_MAPS_API } from '../../constants/common'
 import mapStyles from './mapStyles'
 
 const circleOptions = {
-  strokeColor: 'rgb(240, 0, 0)',
   strokeOpacity: 0.1,
-  strokeWeight: 2,
-  fillColor: 'rgb(230, 0, 0)',
+  strokeWeight: 10,
   fillOpacity: 0.5,
   visible: true,
 }
@@ -84,7 +82,6 @@ class GMaps extends Component {
     this._map = map
     this.setMapBounds()
     this.setGoogleLoaded()
-    console.log(window.google)
   }
 
   handleZoomChanged = () => {
@@ -96,8 +93,8 @@ class GMaps extends Component {
 
   render() {
     const { height, isGoogleLoaded } = this.state
-    const { totalInfectedByTown } = this.props
-    // const totalInfectedByTown = this.props.totalInfectedByTown.slice(0, 10)
+    const { activeId, totalInfectedByTown } = this.props
+    console.log(activeId)
 
     return (
       <section className="border bg-dark h-100" ref={this.containerRef}>
@@ -116,13 +113,16 @@ class GMaps extends Component {
               onLoad={this.handleOnLoad}
               onZoomChanged={this.handleZoomChanged}
             >
-              {isGoogleLoaded && totalInfectedByTown.map(({ town, lat, lng, totalInfected }) => (
+              {isGoogleLoaded && totalInfectedByTown.map(({ id, town, lat, lng, totalInfected }) => (
                 <Marker
                   animation="DROP"
                   position={{ lat, lng }}
                   key={camelCase(town)}
                   icon={{
                     ...circleOptions,
+                    fillColor: activeId === id ? '#e6009d' : '#e60000',
+                    strokeColor: activeId === id ? '#e6009d' : '#e60000',
+                    zIndex: activeId === id ? 99 : 9,
                     path: window.google.maps.SymbolPath.CIRCLE,
                     scale: totalInfected/4e3,
                   }}
@@ -138,6 +138,7 @@ class GMaps extends Component {
 }
 
 GMaps.propTypes = {
+  activeId: PropTypes.string.isRequired,
   totalInfectedByTown: PropTypes.array.isRequired
 }
 

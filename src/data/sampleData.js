@@ -1,5 +1,6 @@
 const data = [
   {
+    "id": "mountFletcherEasternCape",
     "town": "Mount Fletcher, Eastern Cape",
     "totalInfected": 124736,
     "totalDeaths": 7026,
@@ -8,6 +9,7 @@ const data = [
     "lng": 28.505995
   },
   {
+    "id": "plettenbergBay",
     "town": "Plettenberg Bay",
     "totalInfected": 124632,
     "totalDeaths": 4805,
@@ -16,6 +18,7 @@ const data = [
     "lng": 23.363401
   },
   {
+    "id": "northviewEstatePolokwaneLocalMunicipality",
     "town": "Northview Estate, Polokwane Local Municipality",
     "totalInfected": 91714,
     "totalDeaths": 5936,
@@ -24,6 +27,7 @@ const data = [
     "lng": 29.512388
   },
   {
+    "id": "addo",
     "town": "Addo",
     "totalInfected": 67757,
     "totalDeaths": 4221,
@@ -32,6 +36,7 @@ const data = [
     "lng": 25.711658
   },
   {
+    "id": "bellvilleCapeTown",
     "town": "Bellville, Cape Town",
     "totalInfected": 41907,
     "totalDeaths": 3735,
@@ -40,6 +45,7 @@ const data = [
     "lng": 18.629438
   },
   {
+    "id": "darling",
     "town": "Darling",
     "totalInfected": 23934,
     "totalDeaths": 3013,
@@ -48,6 +54,7 @@ const data = [
     "lng": 18.386065
   },
   {
+    "id": "tugelaFerryKwaZuluNatal",
     "town": "Tugela Ferry, KwaZulu-Natal",
     "totalInfected": 20489,
     "totalDeaths": 783,
@@ -56,6 +63,7 @@ const data = [
     "lng": 30.45396
   },
   {
+    "id": "matatieleEasternCape",
     "town": "Matatiele, Eastern Cape",
     "totalInfected": 18431,
     "totalDeaths": 1661,
@@ -64,6 +72,7 @@ const data = [
     "lng": 28.801413
   },
   {
+    "id": "ottosdalNorthWestProvince",
     "town": "Ottosdal, North West Province",
     "totalInfected": 16627,
     "totalDeaths": 904,
@@ -72,6 +81,7 @@ const data = [
     "lng": 26.005922
   },
   {
+    "id": "swartkopsPortElizabeth",
     "town": "Swartkops, Port Elizabeth",
     "totalInfected": 11766,
     "totalDeaths": 241,
@@ -80,6 +90,7 @@ const data = [
     "lng": 25.596231
   },
   {
+    "id": "saldanha",
     "town": "Saldanha",
     "totalInfected": 10524,
     "totalDeaths": 638,
@@ -88,6 +99,7 @@ const data = [
     "lng": 17.917631
   },
   {
+    "id": "vanderkloofVanDerKloof",
     "town": "Vanderkloof , Van der Kloof",
     "totalInfected": 7589,
     "totalDeaths": 559,
@@ -96,6 +108,7 @@ const data = [
     "lng": 24.741007
   },
   {
+    "id": "amanzimtoti",
     "town": "Amanzimtoti",
     "totalInfected": 6443,
     "totalDeaths": 365,
@@ -104,6 +117,7 @@ const data = [
     "lng": 30.890083
   },
   {
+    "id": "simonsTownCapeTown",
     "town": "Simon's Town, Cape Town",
     "totalInfected": 5510,
     "totalDeaths": 302,
@@ -112,6 +126,7 @@ const data = [
     "lng": 18.435665
   },
   {
+    "id": "wellington",
     "town": "Wellington",
     "totalInfected": 4731,
     "totalDeaths": 582,
@@ -120,6 +135,7 @@ const data = [
     "lng": 19.009657
   },
   {
+    "id": "margateKwaZuluNatal",
     "town": "Margate, KwaZulu-Natal",
     "totalInfected": 4604,
     "totalDeaths": 331,
@@ -128,6 +144,7 @@ const data = [
     "lng": 30.372374
   },
   {
+    "id": "hlokoziKwaZuluNatal",
     "town": "Hlokozi, KwaZulu-Natal",
     "totalInfected": 4472,
     "totalDeaths": 282,
@@ -136,6 +153,7 @@ const data = [
     "lng": 30.286474
   },
   {
+    "id": "westville",
     "town": "Westville",
     "totalInfected": 4077,
     "totalDeaths": 320,
@@ -144,6 +162,7 @@ const data = [
     "lng": 30.916794
   },
   {
+    "id": "lanseria",
     "town": "Lanseria",
     "totalInfected": 3627,
     "totalDeaths": 244,
@@ -152,6 +171,7 @@ const data = [
     "lng": 27.929928
   },
   {
+    "id": "fishHoekCapeTown",
     "town": "Fish Hoek, Cape Town",
     "totalInfected": 3613,
     "totalDeaths": 430,
@@ -160,6 +180,7 @@ const data = [
     "lng": 18.43
   },
   {
+    "id": "jeffreysBay",
     "town": "Jeffreys Bay",
     "totalInfected": 2729,
     "totalDeaths": 117,
@@ -168,6 +189,7 @@ const data = [
     "lng": 24.916668
   },
   {
+    "id": "mosselBay",
     "town": "Mossel Bay",
     "totalInfected": 1882,
     "totalDeaths": 267,
@@ -176,6 +198,7 @@ const data = [
     "lng": 22.105865
   },
   {
+    "id": "vosburg",
     "town": "Vosburg",
     "totalInfected": 1673,
     "totalDeaths": 60,
@@ -184,6 +207,7 @@ const data = [
     "lng": 22.8463
   },
   {
+    "id": "portAlfred",
     "town": "Port Alfred",
     "totalInfected": 1624,
     "totalDeaths": 148,
@@ -192,6 +216,7 @@ const data = [
     "lng": 26.891699
   },
   {
+    "id": "presidentParkAhMidrand",
     "town": "President Park AH, Midrand",
     "totalInfected": 1417,
     "totalDeaths": 53,
@@ -200,6 +225,7 @@ const data = [
     "lng": 28.15341
   },
   {
+    "id": "kinrossMpumalanga",
     "town": "Kinross, Mpumalanga",
     "totalInfected": 1251,
     "totalDeaths": 155,
@@ -208,6 +234,7 @@ const data = [
     "lng": 29.098255
   },
   {
+    "id": "thabazimbi",
     "town": "Thabazimbi",
     "totalInfected": 1126,
     "totalDeaths": 47,
@@ -216,6 +243,7 @@ const data = [
     "lng": 27.404091
   },
   {
+    "id": "gaMolepo",
     "town": "Ga-Molepo",
     "totalInfected": 1018,
     "totalDeaths": 57,
@@ -224,6 +252,7 @@ const data = [
     "lng": 29.803396
   },
   {
+    "id": "piketberg",
     "town": "Piketberg",
     "totalInfected": 977,
     "totalDeaths": 43,
@@ -232,6 +261,7 @@ const data = [
     "lng": 18.766666
   },
   {
+    "id": "danielskuil",
     "town": "Danielskuil",
     "totalInfected": 771,
     "totalDeaths": 0,
@@ -240,6 +270,7 @@ const data = [
     "lng": 23.530109
   },
   {
+    "id": "lorraine",
     "town": "Lorraine",
     "totalInfected": 752,
     "totalDeaths": 161,
@@ -248,6 +279,7 @@ const data = [
     "lng": 25.5
   },
   {
+    "id": "pimville",
     "town": "Pimville",
     "totalInfected": 746,
     "totalDeaths": 10,
