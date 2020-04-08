@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import get from 'lodash/get'
 import { Upload, Modal } from 'antd'
 import { InboxOutlined } from '@ant-design/icons'
 import xlsx from 'xlsx'
@@ -13,7 +14,10 @@ const splitLetterAndNumber = string => {
 }
 
 const getDataFromSheet = sheet => {
-  const [startCell, endCell] = sheet['!ref'].split(':')
+  const ref = get(sheet, '!ref', '*****')
+  console.log(ref)
+  if (1) return ''
+  const [startCell, endCell] = ref.split(':')
   const [startCol, startRow] = splitLetterAndNumber(startCell)
   const [endCol, endRow] = splitLetterAndNumber(endCell)
   const arr = []
@@ -61,14 +65,19 @@ class ImportData extends Component {
 
   parseFileAndUploadData = async file => {
     const sheets = await this.readFileData(file)
-    const data = getDataFromSheet(sheets.Sheet1)
-    this.uploadData(data)
+    const sheetKeys = Object.keys(sheets)
+    const sheet = get(sheets, sheetKeys[0])
+    if (sheet) {
+      const data = xlsx.utils.sheet_to_json(sheet)
+      this.uploadData(data)  
+    }
   }
 
   handleBeforeUpload = file => {
     if (file) {
       this.files = [file]
       this.parseFileAndUploadData(file);
+      this.hideModal()
     }
     return false
   }
@@ -86,11 +95,13 @@ class ImportData extends Component {
       <p>
         Please import an excel file contain the google map data.
         <br />
-        <a href="/southAfricaCovid19Stats.xlsx" target="_blank">Here is a sample file</a> that you may use it import data
+        <a href={this.props.sampleFile} target="_blank">
+          Here is a sample file
+        </a> that you may use it import data
       </p>
 
       <Dragger
-        accept=".xlsx, xlsm, .xml"
+        accept=".xls, .xlsx, xlsm, .xml"
         beforeUpload={this.handleBeforeUpload}
         fileList={this.files}
         name="file"
@@ -114,10 +125,10 @@ class ImportData extends Component {
 
     return (
       <section className="mb-2 border p-2 d-flex justify-content-center align-items-center flex-column mb-2 bg-light text-center">
-        <h3 className="h5">Import data</h3>
-        <p>Upload a file containing the COVID 19 infection data</p>
+        <h3 className="h5">Upload file</h3>
+        <p>Upload a file containing the map data</p>
         <button className={`btn ${hasData ? 'btn-outline-secondary' : 'btn-primary'}`} type="button" onClick={this.showModal}>
-          Import data
+          Upload file
         </button>
         <Modal
           wrapClassName="download-cta-modal"
@@ -134,6 +145,7 @@ class ImportData extends Component {
 
 ImportData.propTypes = {
   hasData: PropTypes.bool.isRequired,
+  sampleFile: PropTypes.string.isRequired,
   setData: PropTypes.func.isRequired,
 }
 

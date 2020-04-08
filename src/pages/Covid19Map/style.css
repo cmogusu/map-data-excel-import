@@ -1,0 +1,23 @@
+.app {
+  font-size: 13px;
+}
+
+.red {
+  color: red;
+}
+
+.blue {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
+.black {
+  color: #000;
+}
+
+.bg-dark-blue {
+  background: #17263c;
+}

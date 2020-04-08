@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { GoogleMap, LoadScript, MarkerClusterer, Marker } from '@react-google-maps/api'
 import { LoadingOutlined } from '@ant-design/icons'
-import { GOOGLE_MAPS_API } from '../../constants/common'
+import { GOOGLE_MAPS_API } from 'constants/common'
 
 
 class GMaps extends Component {

@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import './style.css'
 
-const Header = () => {
+const Header = ({ title }) => {
   const [isMenuOpen, toggleMenu] = useState(false)
   const memoizedToggleMenu = () => toggleMenu(!isMenuOpen)
 
   return (
     <header className="pos-f-t mb-2">
       <nav className="navbar navbar-dark bg-light border">
-        <h1 className="h4">Coronavirus COVID-19 Cases in South Africa</h1>
+        <h1 className="h4">{title}</h1>
         <button className="navbar-toggler bg-dark" type="button" onClick={memoizedToggleMenu} aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -23,6 +24,10 @@ const Header = () => {
       </div>
     </header>
   )
+}
+
+Header.propTypes = {
+  title: PropTypes.string.isRequired,
 }
 
 export default Header
