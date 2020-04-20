@@ -11,7 +11,7 @@ module.exports = {
   rules: {
     'prettier/prettier': [
       1,
-      { singleQuote: true, semi: true, trailingComma: 'all' },
+      { singleQuote: true, semi: false, trailingComma: 'all' },
     ],
     'no-console': 1,
     'max-len': 0,

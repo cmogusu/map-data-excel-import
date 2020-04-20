@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Layer from 'components/StreetViewPanorama'
+import Layer from 'components/Polyline'
 // import Layer from 'components/DirectionsService'
 import 'antd/dist/antd.css'
 

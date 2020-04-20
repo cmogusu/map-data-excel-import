@@ -33,10 +33,12 @@ const pos = [
 class GMaps extends Component {
   streetPanaroma = null
 
+  streetPanaroma1 = null
+
   state = {
     isZoomRunning: false,
     isPanoRunning: false,
-    zoomSpeed: 0.01,
+    zoomSpeed: 0.05,
   }
 
   handleOnLoad = streetPanaroma => {
@@ -88,13 +90,19 @@ class GMaps extends Component {
     if (this.state.isPanoRunning) return
 
     this.streetPanaroma.setPov({ heading: 266, pitch: 0 })
-    this.setState({ isZoomRunning: true }, this.runZoom)
+    this.setState({
+      isZoomRunning: true,
+      isPanoRunning: false,
+    }, this.runZoom)
   }
 
 
   handleStartPano = () => {
     if (this.state.isPanoRunning) return
-    this.setState({ isPanoRunning: true }, this.runPano)
+    this.setState({
+      isPanoRunning: true,
+      isZoomRunning: false,
+    }, this.runPano)
   }
 
   handleStopPano = () => {
@@ -105,7 +113,7 @@ class GMaps extends Component {
     if (!this.state.isPanoRunning) return
 
     const { heading, pitch } = this.streetPanaroma.getPov()
-    this.streetPanaroma.setPov({ heading: heading + 0.2, pitch })
+    this.streetPanaroma.setPov({ heading: heading + 0.4, pitch })
 
     window.requestAnimationFrame(this.runPano)
   }
@@ -154,7 +162,7 @@ class GMaps extends Component {
           <GoogleMap
             center={{ lat, lng }}
             id="map"
-            mapContainerStyle={{ width: '2000px', height: '850px' }}
+            mapContainerStyle={{ width: '100%', height: '850px' }}
             zoom={18}
             onClick={this.handleMapClick}
           >
