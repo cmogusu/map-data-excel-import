@@ -50,20 +50,18 @@ class App extends Component {
 
     return (
       <div className="App position-relative">
-        {/*
         <div className="position-absolute layer-1" style={{ width, height }}>
           <Layer
             data={this.state.data}
-            panoId="6HMI6PhsFPMHWJSInBlP0A"
-            zoom={1}
+            panoId="9QQ6OURe9OTkBmMQzribHw"
+            zoom={2.1}
             index={1}
           />
         </div>
-        */}
         <div className="position-relative layer-2" style={{ width, height }}>
           <Layer
             data={this.state.data}
-            panoId="6HMI6PhsFPMHWJSInBlP0A"
+            panoId="bDFv4R7ck6itRuQTAd-ICQ"
             zoom={1}
             index={2}
           />
